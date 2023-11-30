@@ -10,11 +10,14 @@ import 'package:todo_app/app/data/api/api.dart';
 import 'package:todo_app/app/core/extensions/dio_extension.dart';
 import 'package:todo_app/app/data/models/user.dart';
 import 'package:todo_app/app/data/service/local/storage.dart';
+import 'package:todo_app/app/providers/user/user_provider.dart';
+// import 'package:todo_app/app/providers/user/user_provider.dart';
 import '../../routes/paths.dart';
 
 class Auth with ChangeNotifier, UseApi {
   final username = TextEditingController(text: 'kminchelle'),
       password = TextEditingController(text: '0lelplR');
+
   Future login(BuildContext context) async {
     try {
       final res = await authApi.login({
@@ -47,9 +50,8 @@ class Auth with ChangeNotifier, UseApi {
         // save token to shared preferences
         prefs.setString('token', token);
 
-        // save to model
-        User.fromJson(map);
-
+        // save user
+        prefs.setString('auth', res.data);
         // go to home
         context.go(Paths.home);
       }

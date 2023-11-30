@@ -1,19 +1,31 @@
 // this base for routes
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:todo_app/app/core/constants/font.dart';
 import 'package:todo_app/app/core/constants/pages.dart';
 import 'package:todo_app/app/data/models/user.dart';
+import 'package:todo_app/app/data/service/local/storage.dart';
 // import 'package:todo_app/app/data/service/local/storage.dart';
 import 'package:todo_app/app/providers/app_provider.dart';
+import 'package:todo_app/app/providers/user/user_provider.dart';
 
 class HomePage extends ConsumerWidget {
   // final User user;
+
   const HomePage({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // prefs.remove('token');
     final notifier = ref.watch(appStateProvider);
+
+    // get data auth
+
+    String? authLocal = prefs.getString('auth');
+    final auth = User.fromJson(json.decode(authLocal ?? ''));
+
+    // final User user;
     return Scaffold(
       drawer: Drawer(
         backgroundColor: Colors.white,
@@ -66,15 +78,15 @@ class HomePage extends ConsumerWidget {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Icon(Icons.person),
-                            SizedBox(width: 10),
+                            const Icon(Icons.person),
+                            const SizedBox(width: 10),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Fajar"),
+                                  Text(auth.firstName),
                                   Text(
-                                    "Fajarprayoga23@gmail.com",
+                                    auth.email,
                                     overflow: TextOverflow.ellipsis,
                                     softWrap: false,
                                   ),
@@ -125,13 +137,14 @@ class HomePage extends ConsumerWidget {
             ),
             pages[notifier.page]['title'] != 'Home'
                 ? Text(pages[notifier.page]['title'])
-                : SizedBox()
+                : const SizedBox()
           ],
         ),
         // backgroundColor: Colors.blueGrey,
       ),
       body: Padding(
-          padding: EdgeInsets.all(20), child: pages[notifier.page]['page']),
+          padding: const EdgeInsets.all(20),
+          child: pages[notifier.page]['page']),
     );
   }
 }

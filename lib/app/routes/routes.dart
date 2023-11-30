@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:go_router/go_router.dart';
+import 'package:todo_app/app/data/api/api.dart';
+import 'package:todo_app/app/data/models/user.dart';
 import 'package:todo_app/app/data/service/local/storage.dart';
 import 'package:todo_app/app/screens/home/views/home_page.dart';
 import 'package:todo_app/app/screens/login/login_view.dart';
@@ -16,7 +20,40 @@ final GoRouter router = GoRouter(
   ],
 );
 
-String _redirect() {
+Future<String> _redirect() async {
   String? token = prefs.getString('token');
-  return token == null ? Paths.login : Paths.home;
+
+  if (token == null) {
+    return Paths.login;
+  } else {
+    GetAuh getAuth = GetAuh();
+    final res = await getAuth.getAuth(token);
+    if (res) {
+      return Paths.home;
+    } else {
+      // Handle the case where getAuth returned false
+      print('Authentication failed');
+      return Paths.login;
+    }
+  }
+}
+
+class GetAuh with UseApi {
+  Future getAuth(String token) async {
+    try {
+      String? auth = (prefs.getString('auth') ?? '');
+      if (auth != '') {
+        final authJson = json.decode(auth);
+        final res = await authApi.getAuth(authJson['id']);
+        prefs.setString('auth', res.data);
+      } else {
+        print('User id not found');
+      }
+
+      return true;
+    } catch (e, s) {
+      print('Error: $e, StackTrace: $s');
+      return false;
+    }
+  }
 }
