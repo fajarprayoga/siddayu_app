@@ -27,7 +27,8 @@ class LoginView extends ConsumerWidget {
             // form title
             Column(
               children: [
-                Text('SIDDAYU', style: Gfont.fs18.bold),
+                Text('Sistem Informasi Digital Desa Ayunan',
+                    style: Gfont.fs18.bold),
                 const SizedBox(height: 5),
                 Text('Silahkan login untuk menggunakan aplikasi SIDDAYU.',
                     textAlign: TextAlign.center, style: Gfont.muted),

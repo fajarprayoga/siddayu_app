@@ -10,6 +10,8 @@ import 'package:todo_app/app/data/service/local/storage.dart';
 // import 'package:todo_app/app/data/service/local/storage.dart';
 import 'package:todo_app/app/providers/app_provider.dart';
 import 'package:todo_app/app/providers/user/user_provider.dart';
+import 'package:todo_app/app/routes/paths.dart';
+import 'package:todo_app/app/routes/routes.dart';
 
 class HomePage extends ConsumerWidget {
   // final User user;
@@ -47,6 +49,7 @@ class HomePage extends ConsumerWidget {
             children: <Widget>[
               SizedBox(
                 height: 150,
+                // drawer header
                 child: DrawerHeader(
                   decoration: const BoxDecoration(),
                   child: Column(
@@ -100,7 +103,8 @@ class HomePage extends ConsumerWidget {
                   ),
                 ),
               ),
-              // Daftar widget yang dihasilkan
+
+              // List Generate Menu
               ...List.generate(pages.length, (i) {
                 return ListTile(
                   title: Text(
@@ -123,6 +127,21 @@ class HomePage extends ConsumerWidget {
                       : Colors.black,
                 );
               }),
+              ListTile(
+                title: const Text(
+                  "Logout",
+                  style: TextStyle(
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+                onTap: () {
+                  // Tindakan yang diambil saat Logout ditekan
+                  prefs.remove('token');
+                  prefs.remove('auth');
+                  Navigator.pop(context); // Tutup Drawer setelah Logout
+                  router.push(Paths.login);
+                },
+              ),
             ],
           ),
         ),
@@ -132,12 +151,12 @@ class HomePage extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Sistem Informasi Digital Desa Ayunan',
+              pages[notifier.page]['title'],
               style: Gfont.bold.fsize(18),
             ),
-            pages[notifier.page]['title'] != 'Home'
-                ? Text(pages[notifier.page]['title'])
-                : const SizedBox()
+            // pages[notifier.page]['title'] != 'Home'
+            //     ? Text(pages[notifier.page]['title'])
+            //     : const SizedBox()
           ],
         ),
         // backgroundColor: Colors.blueGrey,
