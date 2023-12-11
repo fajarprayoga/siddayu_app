@@ -15,82 +15,89 @@ class LoginView extends ConsumerWidget {
     final username = notifier.username, password = notifier.password;
 
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-    return Scaffold(
+    if (notifier.loading) {
+      return Scaffold(
         body: Center(
-      child: SizedBox(
-        width: 320,
-        child: ListView(
-          padding: const EdgeInsets.symmetric(vertical: 50),
-          shrinkWrap: true,
-          children: [
-            // form title
-            Column(
-              children: [
-                Text('Sistem Informasi Digital Desa Ayunan',
-                    style: Gfont.fs18.bold),
-                const SizedBox(height: 5),
-                Text('Silahkan login untuk menggunakan aplikasi SIDDAYU.',
-                    textAlign: TextAlign.center, style: Gfont.muted),
-              ],
-            ),
-
-            const SizedBox(height: 50),
-
-            Form(
-              key: formKey,
-              child: Column(
+          child: Text('Loading'),
+        ),
+      );
+    } else {
+      return Scaffold(
+          body: Center(
+        child: SizedBox(
+          width: 320,
+          child: ListView(
+            padding: const EdgeInsets.symmetric(vertical: 50),
+            shrinkWrap: true,
+            children: [
+              // form title
+              Column(
                 children: [
-                  // text input email
-                  TextFormField(
-                    validator: (String? arg) {
-                      if (arg!.length < 3) {
-                        return 'Email must be more than 2 charater';
-                      }
-                      return null;
-                    },
-                    controller: username,
-                    decoration: const InputDecoration(
-                        hintText: 'Type your email address'),
-                    onSaved: (String? val) {
-                      username.text = val ?? '';
-                    },
-                  ),
-
-                  // text input password
-                  TextFormField(
-                    validator: (String? arg) {
-                      if (arg!.length < 6) {
-                        return 'Password must be more than 6 charater';
-                      }
-                      return null;
-                    },
-                    controller: password,
-                    decoration:
-                        const InputDecoration(hintText: 'Type your password'),
-                    onSaved: (String? val) {
-                      password.text = val ?? '';
-                    },
-                  ),
+                  Text('Sistem Informasi Digital Desa Ayunan',
+                      style: Gfont.fs18.bold),
+                  const SizedBox(height: 5),
+                  Text('Silahkan login untuk menggunakan aplikasi SIDDAYU.',
+                      textAlign: TextAlign.center, style: Gfont.muted),
                 ],
               ),
-            ),
 
-            const SizedBox(height: 15),
+              const SizedBox(height: 50),
 
-            // form button
-            ElevatedButton(
-              onPressed: () {
-                if (formKey.currentState!.validate()) {
-                  formKey.currentState?.save();
-                  notifier.login(context);
-                }
-              },
-              child: const Text('Login'),
-            )
-          ],
+              Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    // text input email
+                    TextFormField(
+                      validator: (String? arg) {
+                        if (arg!.length < 3) {
+                          return 'Email must be more than 2 charater';
+                        }
+                        return null;
+                      },
+                      controller: username,
+                      decoration: const InputDecoration(
+                          hintText: 'Type your email address'),
+                      onSaved: (String? val) {
+                        username.text = val ?? '';
+                      },
+                    ),
+
+                    // text input password
+                    TextFormField(
+                      validator: (String? arg) {
+                        if (arg!.length < 6) {
+                          return 'Password must be more than 6 charater';
+                        }
+                        return null;
+                      },
+                      controller: password,
+                      decoration:
+                          const InputDecoration(hintText: 'Type your password'),
+                      onSaved: (String? val) {
+                        password.text = val ?? '';
+                      },
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 15),
+
+              // form button
+              ElevatedButton(
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    formKey.currentState?.save();
+                    notifier.login(context);
+                  }
+                },
+                child: const Text('Login'),
+              )
+            ],
+          ),
         ),
-      ),
-    ));
+      ));
+    }
   }
 }

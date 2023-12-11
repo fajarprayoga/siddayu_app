@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:go_router/go_router.dart';
 import 'package:todo_app/app/data/api/api.dart';
-import 'package:todo_app/app/data/models/user.dart';
+import 'package:todo_app/app/data/models/auth.dart';
 import 'package:todo_app/app/data/service/local/storage.dart';
 import 'package:todo_app/app/screens/home/views/home_page.dart';
 import 'package:todo_app/app/screens/login/login_view.dart';

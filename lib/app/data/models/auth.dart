@@ -1,4 +1,4 @@
-class User {
+class Auth {
   final int id;
   final String username;
   final String email;
@@ -6,9 +6,8 @@ class User {
   final String lastName;
   final String gender;
   final String image;
-  final String position;
 
-  User({
+  Auth({
     required this.id,
     required this.username,
     required this.email,
@@ -16,20 +15,18 @@ class User {
     required this.lastName,
     required this.gender,
     required this.image,
-    required this.position,
   });
 
   // Factory method untuk membuat instance User dari JSON
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
+  factory Auth.fromJson(Map<String, dynamic> json) {
+    return Auth(
         id: json['id'],
         username: json['username'],
         email: json['email'],
         firstName: json['firstName'],
         lastName: json['lastName'],
         gender: json['gender'],
-        image: json['image'],
-        position: json['position']);
+        image: json['image']);
   }
 
   Map<String, dynamic> toJson() => {
@@ -40,6 +37,5 @@ class User {
         'lastName': lastName,
         'gender': gender,
         'image': image,
-        'position': position,
       };
 }

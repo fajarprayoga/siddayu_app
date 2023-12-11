@@ -8,18 +8,17 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:todo_app/app/core/helpers/toast.dart';
 import 'package:todo_app/app/data/api/api.dart';
 import 'package:todo_app/app/core/extensions/dio_extension.dart';
-import 'package:todo_app/app/data/models/user.dart';
 import 'package:todo_app/app/data/service/local/storage.dart';
-import 'package:todo_app/app/providers/user/user_provider.dart';
 // import 'package:todo_app/app/providers/user/user_provider.dart';
 import '../../routes/paths.dart';
 
 class Auth with ChangeNotifier, UseApi {
   final username = TextEditingController(text: 'kminchelle'),
       password = TextEditingController(text: '0lelplR');
-
+  bool loading = false;
   Future login(BuildContext context) async {
     try {
+      loading = true;
       final res = await authApi.login({
         'username': username.text,
         'password': password.text,
@@ -53,11 +52,16 @@ class Auth with ChangeNotifier, UseApi {
         // save user
         prefs.setString('auth', res.data);
         // go to home
+        // await Future.delayed(const Duration(seconds: 2));
+
         context.go(Paths.home);
       }
     } catch (e, s) {
       print('Error: $e, StackTrace: $s');
-    } finally {}
+      return Toasts.show('error');
+    } finally {
+      loading = false;
+    }
   }
 }
 

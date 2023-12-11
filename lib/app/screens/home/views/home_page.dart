@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:todo_app/app/core/constants/font.dart';
 import 'package:todo_app/app/core/constants/pages.dart';
-import 'package:todo_app/app/data/models/user.dart';
+import 'package:todo_app/app/data/models/auth.dart';
 import 'package:todo_app/app/data/service/local/storage.dart';
 // import 'package:todo_app/app/data/service/local/storage.dart';
 import 'package:todo_app/app/providers/app_provider.dart';
-import 'package:todo_app/app/providers/user/user_provider.dart';
+// import 'package:todo_app/app/providers/user/user_provider.dart';
 import 'package:todo_app/app/routes/paths.dart';
 import 'package:todo_app/app/routes/routes.dart';
 
@@ -25,7 +25,7 @@ class HomePage extends ConsumerWidget {
     // get data auth
 
     String? authLocal = prefs.getString('auth');
-    final auth = User.fromJson(json.decode(authLocal ?? ''));
+    final auth = Auth.fromJson(json.decode(authLocal ?? ''));
 
     // final User user;
     return Scaffold(
