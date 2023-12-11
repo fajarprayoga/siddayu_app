@@ -5,26 +5,26 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:todo_app/app/core/extensions/dio_extension.dart';
 import 'package:todo_app/app/core/helpers/toast.dart';
 import 'package:todo_app/app/data/api/api.dart';
-import 'package:todo_app/app/core/extensions/dio_extension.dart';
-import 'package:todo_app/app/data/models/user.dart';
 import 'package:todo_app/app/data/service/local/storage.dart';
-import 'package:todo_app/app/providers/user/user_provider.dart';
+
 // import 'package:todo_app/app/providers/user/user_provider.dart';
 import '../../routes/paths.dart';
 
 class Auth with ChangeNotifier, UseApi {
   final username = TextEditingController(text: 'kminchelle'),
       password = TextEditingController(text: '0lelplR');
-
+  bool loading = false;
   Future login(BuildContext context) async {
     try {
+      loading = true;
       final res = await authApi.login({
         'username': username.text,
         'password': password.text,
       });
-
+      loading = false;
       final map = json.decode(res.data);
 
       // sesuaikan errornya

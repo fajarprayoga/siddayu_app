@@ -12,17 +12,17 @@ class HomeView extends StatelessWidget {
         // mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 24,
           ),
           Text(
             'SIDDAYU',
             style: Gfont.fs(34).bold,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Text('Sistem Informasi Digital Desa Ayunan')
+          const Text('Sistem Informasi Digital Desa Ayunan')
         ],
       ),
     );

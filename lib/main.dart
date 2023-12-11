@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app/app/core/extensions/dio_extension.dart';
 import 'package:todo_app/app/data/api/api.dart';
 import 'package:todo_app/app/data/service/local/storage.dart';
+
 import 'app/core/constants/theme.dart';
 import 'app/routes/routes.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:todo_app/app/data/api/api.dart';
 
 void main() async {
   // init flutter, to make sure all the widgets are ready

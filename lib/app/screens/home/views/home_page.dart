@@ -9,7 +9,6 @@ import 'package:todo_app/app/data/models/user.dart';
 import 'package:todo_app/app/data/service/local/storage.dart';
 // import 'package:todo_app/app/data/service/local/storage.dart';
 import 'package:todo_app/app/providers/app_provider.dart';
-import 'package:todo_app/app/providers/user/user_provider.dart';
 import 'package:todo_app/app/routes/paths.dart';
 import 'package:todo_app/app/routes/routes.dart';
 
@@ -107,12 +106,20 @@ class HomePage extends ConsumerWidget {
               // List Generate Menu
               ...List.generate(pages.length, (i) {
                 return ListTile(
-                  title: Text(
-                    pages[i]['title'],
-                    style: TextStyle(
-                        fontWeight: notifier.page == i
-                            ? FontWeight.bold
-                            : FontWeight.normal),
+                  title: Row(
+                    children: [
+                      Icon(pages[i]['icon']),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        pages[i]['title'],
+                        style: TextStyle(
+                            fontWeight: notifier.page == i
+                                ? FontWeight.bold
+                                : FontWeight.normal),
+                      ),
+                    ],
                   ),
                   onTap: () {
                     final notifier = ref.read(appStateProvider.notifier);
