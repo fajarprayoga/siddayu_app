@@ -20,11 +20,12 @@ class Auth with ChangeNotifier, UseApi {
   Future login(BuildContext context) async {
     try {
       loading = true;
+      notifyListeners();
       final res = await authApi.login({
         'username': username.text,
         'password': password.text,
       });
-      loading = false;
+
       final map = json.decode(res.data);
 
       // sesuaikan errornya
@@ -38,7 +39,9 @@ class Auth with ChangeNotifier, UseApi {
       if (map['message'] != null && map['message'] != '') {
         return Toasts.show(map['message']);
       }
-
+      loading = false;
+      notifyListeners();
+      Toasts.show('Login Successful');
       String? token = map['token'];
 
       if (token != null) {
