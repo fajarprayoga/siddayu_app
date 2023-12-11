@@ -10,4 +10,6 @@ class Paths {
       return '/management-tata-kelola-detail/:id';
     }
   }
+
+  static const String formManagementTataKelola = '/form-management-tata-kelola';
 }

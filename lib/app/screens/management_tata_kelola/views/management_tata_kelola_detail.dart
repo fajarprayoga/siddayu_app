@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:todo_app/app/core/constants/font.dart';
 import 'package:todo_app/app/core/constants/value.dart';
+import 'package:todo_app/app/routes/paths.dart';
 
 class ManagementTataKelolaDetail extends StatelessWidget {
   final params;
@@ -122,7 +124,7 @@ class ButtonAddKegiatan extends StatelessWidget {
       alignment: Alignment.centerRight,
       child: InkWell(
         onTap: () {
-          print("object");
+          context.push(Paths.formManagementTataKelola);
         },
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: padding, vertical: padding),

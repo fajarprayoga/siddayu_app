@@ -1,18 +1,13 @@
 part of 'widget.dart';
 
-class Loading extends StatefulWidget {
+class Loading extends StatelessWidget {
   final bool isLoading;
 
   const Loading({Key? key, required this.isLoading}) : super(key: key);
 
   @override
-  State<Loading> createState() => _LoadingState();
-}
-
-class _LoadingState extends State<Loading> {
-  @override
   Widget build(BuildContext context) {
-    return widget.isLoading
+    return isLoading
         ? const Center(
             child: CircularProgressIndicator(),
           ) // Display a loading indicator if isLoading is true
