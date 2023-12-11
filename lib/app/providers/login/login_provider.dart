@@ -56,11 +56,16 @@ class Auth with ChangeNotifier, UseApi {
         // save user
         prefs.setString('auth', res.data);
         // go to home
+        // await Future.delayed(const Duration(seconds: 2));
+
         context.go(Paths.home);
       }
     } catch (e, s) {
       print('Error: $e, StackTrace: $s');
-    } finally {}
+      return Toasts.show('error');
+    } finally {
+      loading = false;
+    }
   }
 }
 
