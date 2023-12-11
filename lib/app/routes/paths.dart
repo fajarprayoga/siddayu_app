@@ -3,4 +3,11 @@ class Paths {
   static const String login = '/login';
   static const String formTodo = '/form-todo';
   static const String managementTataKelola = '/management-tata-kelola';
+  static String managementTataKelolaDetail(String? id) {
+    if (id != null && id.isNotEmpty) {
+      return '/management-tata-kelola-detail/:$id';
+    } else {
+      return '/management-tata-kelola-detail/:id';
+    }
+  }
 }

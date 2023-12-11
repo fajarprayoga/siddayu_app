@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:go_router/go_router.dart';
 import 'package:todo_app/app/data/api/api.dart';
-import 'package:todo_app/app/data/models/auth.dart';
 import 'package:todo_app/app/data/service/local/storage.dart';
 import 'package:todo_app/app/screens/home/views/home_page.dart';
 import 'package:todo_app/app/screens/login/login_view.dart';
 import 'package:todo_app/app/screens/management_tata_kelola/views/management_tata_kelola.dart';
+import 'package:todo_app/app/screens/management_tata_kelola/views/management_tata_kelola_detail.dart';
 
 import 'helper.dart';
 import 'paths.dart';
@@ -17,7 +17,13 @@ final GoRouter router = GoRouter(
         redirect: (_) => _redirect()),
     Route.set(Paths.login, (state) => const LoginView()),
     Route.set(Paths.formTodo, (state) => ManagementTataKelola()),
-    Route.set(Paths.managementTataKelola, (state) => ManagementTataKelola()),
+    // Route.set(Paths.managementTataKelolaDetail(null),
+    //     (state) => ManagementTataKelolaDetail()),
+    GoRoute(
+        path: Paths.managementTataKelolaDetail(null),
+        builder: (_, state) {
+          return ManagementTataKelolaDetail(params: state.params["id"]);
+        }),
   ],
 );
 
