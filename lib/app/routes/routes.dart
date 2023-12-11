@@ -22,7 +22,7 @@ final GoRouter router = GoRouter(
     GoRoute(
         path: Paths.managementTataKelolaDetail(null),
         builder: (_, state) {
-          return ManagementTataKelolaDetail(params: state.params["id"]);
+          return ManagementTataKelolaDetail(params: state.extra);
         }),
   ],
 );

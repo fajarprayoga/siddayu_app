@@ -29,8 +29,6 @@ class UserNotifier extends StateNotifier<AsyncValue<List<User>>> with UseApi {
         }
       ];
 
-      print("data rerw $resData");
-
       // Simulate an API call by converting data into User models
       final List<User> userList = resData.map((e) => User.fromJson(e)).toList();
       state = AsyncValue.data(userList);

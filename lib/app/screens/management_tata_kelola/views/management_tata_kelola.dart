@@ -97,7 +97,7 @@ class KegiatanProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: padding - 10),
+      padding: EdgeInsets.symmetric(vertical: padding),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -142,7 +142,8 @@ class BoxStaff extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.go(Paths.managementTataKelolaDetail('1')),
+      onTap: () => context.push(Paths.managementTataKelolaDetail('1'),
+          extra: {'id': 1, 'name': name}),
       child: Container(
         height: 68,
         decoration: BoxDecoration(
